@@ -15,6 +15,10 @@ new Vue({
       { text: 'item 10' }
     ]
   },
+  ready: function () {
+    console.log('Todo app is ready')
+    hydration.drink('#app')
+  },
   methods: {
     addTodo: function () {
       var text = this.newTodo.trim()
