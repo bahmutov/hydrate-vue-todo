@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hydrate Vue Todo</title>
+</head>
+<body>
+<h2>Vue app below</h2>
+  <div id="app">
+    Enter todo: <input v-model="newTodo" v-on:keyup.enter="addTodo">
+    <ul>
+      <li v-for="todo in todos">
+        <span v-text="todo.text"></span>
+        <button v-on:click="removeTodo($index)">X</button>
+      </li>
+    </ul>
+  </div>
+  <script src="https://cdn.jsdelivr.net/vue/1.0.11/vue.js"></script>
+  <script src="src/app.js"></script>
+</body>
+</html>
