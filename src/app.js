@@ -22,6 +22,7 @@ new Vue({
         this.todos.push({ text: text })
         this.newTodo = ''
       }
+      hydration.pour('#app')
     },
     removeTodo: function (index) {
       this.todos.splice(index, 1)
