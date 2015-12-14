@@ -17,7 +17,11 @@ new Vue({
   },
   ready: function () {
     console.log('Todo app is ready')
+    // replaces fake content with live
     hydration.drink('#app')
+
+    // we should save the HTML here
+    hydration.pour('#app')
   },
   methods: {
     addTodo: function () {
@@ -26,7 +30,6 @@ new Vue({
         this.todos.push({ text: text })
         this.newTodo = ''
       }
-      hydration.pour('#app')
     },
     removeTodo: function (index) {
       this.todos.splice(index, 1)
