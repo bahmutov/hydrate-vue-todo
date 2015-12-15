@@ -1,16 +1,17 @@
 {
   "name": "hydrate-vue-todo",
-  "version": "1.0.0",
   "description": "Almost instant Vue.js app init from the HTML stored from previous run",
-  "main": "index.js",
+  "main": "src/hydration.js",
+  "version": "0.0.0-semantic-release",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "commit": "commit-wizard",
-    "size": "t=\"$(npm pack .)\"; wc -c \"${t}\"; tar tvf \"${t}\"; rm \"${t}\";"
+    "size": "t=\"$(npm pack .)\"; wc -c \"${t}\"; tar tvf \"${t}\"; rm \"${t}\";",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bahmutov/hydrate-vue-todo.git"
+    "url": "https://github.com/bahmutov/hydrate-vue-todo.git"
   },
   "keywords": [
     "vue",
@@ -43,6 +44,7 @@
     }
   },
   "devDependencies": {
-    "pre-git": "3.1.1"
+    "pre-git": "3.1.1",
+    "semantic-release": "^4.3.5"
   }
 }
