@@ -47,11 +47,17 @@ function getBottle (selectId, verbose) {
     }
 
     function closeOverlay () {
-      document.body.removeChild(overlay)
+      if (overlay) {
+        document.body.removeChild(overlay)
+        overlay = null
+      }
     }
 
     function closeMessage () {
-      document.body.removeChild(message)
+      if (message) {
+        document.body.removeChild(message)
+        message = null
+      }
     }
 
     return {
@@ -93,6 +99,8 @@ function getBottle (selectId, verbose) {
       var html = document.getElementById(selectId).outerHTML
       localStorage.setItem(selectId, html)
       log('poured', selectId, html)
+      display.message.show('Saved application UI')
+      display.message.hide(1000)
     },
     // takes saved HTML snapshot and creates
     // a temporary static DOM, allowing real app
