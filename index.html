@@ -4,7 +4,19 @@
   <title>Hydrate Vue Todo</title>
 </head>
 <body>
-<h2>Vue app below</h2>
+  <h2>What?</h2>
+  <p>If you reload the page, it will show the previous items almost immediately.
+  The "dry" HTML will be shown while the Vue.js library is being loaded, then
+  it will replace the static "dry" HTML with the fully functional web application.
+  </p>
+  <p>To fully appreciate the experience, open DevTools Network tab and example
+  network throttling to slow down the loading of the vue.js script.
+  You will see that this demo loads immediately!
+  </p>
+  <p>
+  Use hydration: <input type="checkbox" name="hydrate">
+  </p>
+  <h2>Vue app below</h2>
   <div id="app">
     Enter todo: <input v-model="newTodo" v-on:keyup.enter="addTodo">
     <ul>
