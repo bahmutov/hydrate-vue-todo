@@ -9,6 +9,57 @@ function getBottle (selectId, verbose) {
 
   var dryId = formDrySelectorId(selectId)
 
+  var displayMessage = (function initOverlay () {
+    var overlay, message
+
+    function createOverlay () {
+      if (overlay) {
+        return
+      }
+
+      overlay = document.createElement('div')
+      var style = overlay.style
+      style.width = '100%'
+      style.height = '100%'
+      style.opacity = 0.5
+      style.position = 'fixed'
+      style.left = 0
+      style.top = 0
+      style.backgroundColor = 'hsla(187, 100%, 42%, 0.12)'
+      document.body.appendChild(overlay)
+    }
+
+    function createMessage (text) {
+      if (!message) {
+        message = document.createElement('h3')
+        message.style.color = '#000'
+        message.style.position = 'fixed'
+        message.style.top = '1em'
+        message.style.right = '2em'
+        overlay.appendChild(message)
+      }
+      message.textContent = text
+    }
+
+    function close () {
+      document.body.removeChild(overlay)
+    }
+
+    return {
+      show: function show (text) {
+        createOverlay()
+        createMessage(text)
+      },
+      hide: function hide (timeoutMs) {
+        if (timeoutMs) {
+          setTimeout(close, timeoutMs)
+        } else {
+          close()
+        }
+      }
+    }
+  }())
+
   /* global localStorage */
 
   return {
@@ -23,6 +74,8 @@ function getBottle (selectId, verbose) {
     // to load in hidden mode
     open: function open () {
       log('opening', selectId)
+      displayMessage.show('Web application is loading ...')
+
       var html = localStorage.getItem(selectId)
       if (html) {
         html = html.replace('id="' + selectId + '"',
@@ -36,6 +89,9 @@ function getBottle (selectId, verbose) {
     // DRY content with fully functioning application
     drink: function drink () {
       log('drinking', selectId)
+      displayMessage.show('Web application is running')
+      displayMessage.hide(1000)
+
       var dryEl = document.getElementById(dryId)
       if (dryEl) {
         dryEl.parentNode.removeChild(dryEl)
