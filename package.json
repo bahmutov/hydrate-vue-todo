@@ -38,8 +38,12 @@
   "config": {
     "pre-git": {
       "commit-msg": [],
-      "pre-commit": [],
-      "pre-push": [],
+      "pre-commit": [
+        "npm run test"
+      ],
+      "pre-push": [
+        "npm run lint"
+      ],
       "post-commit": [],
       "post-merge": []
     }
