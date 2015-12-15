@@ -9,7 +9,7 @@ function getBottle (selectId, verbose) {
 
   var dryId = formDrySelectorId(selectId)
 
-  var displayMessage = (function initOverlay () {
+  var display = (function initOverlay () {
     var overlay, message
 
     function createOverlay () {
@@ -32,29 +32,49 @@ function getBottle (selectId, verbose) {
     function createMessage (text) {
       if (!message) {
         message = document.createElement('h3')
-        message.style.color = '#000'
+        message.style.color = '#333'
         message.style.position = 'fixed'
         message.style.top = '1em'
         message.style.right = '2em'
-        overlay.appendChild(message)
+        document.body.appendChild(message)
       }
       message.textContent = text
     }
 
-    function close () {
+    function closeOverlay () {
       document.body.removeChild(overlay)
     }
 
+    function closeMessage () {
+      document.body.removeChild(message)
+    }
+
     return {
-      show: function show (text) {
-        createOverlay()
-        createMessage(text)
+      message: {
+        show: function show (text) {
+          createMessage(text)
+        },
+        hide: function (timeoutMs) {
+          if (timeoutMs) {
+            setTimeout(closeMessage, timeoutMs)
+          } else {
+            closeMessage()
+          }
+        }
       },
-      hide: function hide (timeoutMs) {
-        if (timeoutMs) {
-          setTimeout(close, timeoutMs)
-        } else {
-          close()
+      overlay: {
+        show: function show (text) {
+          createOverlay()
+          if (text) {
+            createMessage(text)
+          }
+        },
+        hide: function hide (timeoutMs) {
+          if (timeoutMs) {
+            setTimeout(closeOverlay, timeoutMs)
+          } else {
+            closeOverlay()
+          }
         }
       }
     }
@@ -74,7 +94,7 @@ function getBottle (selectId, verbose) {
     // to load in hidden mode
     open: function open () {
       log('opening', selectId)
-      displayMessage.show('Web application is loading ...')
+      display.overlay.show('Web application is loading ...')
 
       var html = localStorage.getItem(selectId)
       if (html) {
@@ -89,8 +109,9 @@ function getBottle (selectId, verbose) {
     // DRY content with fully functioning application
     drink: function drink () {
       log('drinking', selectId)
-      displayMessage.show('Web application is running')
-      displayMessage.hide(1000)
+      display.message.show('Web application is running')
+      display.overlay.hide()
+      display.message.hide(1000)
 
       var dryEl = document.getElementById(dryId)
       if (dryEl) {
