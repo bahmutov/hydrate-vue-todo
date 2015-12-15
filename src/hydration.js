@@ -1,19 +1,31 @@
-function getBottle(selectId) {
+function getBottle(selectId, verbose) {
+
+  function noop() {}
+
+  var log = verbose ? console.log.bind(console) : noop;
+
+  function formDrySelectorId(id) {
+    return 'dry-' + id
+  }
+
+  var dryId = formDrySelectorId(selectId);
+
   return {
     // saves HTML snapshot for a given module
     pour: function pour () {
       var html = document.getElementById(selectId).outerHTML
       localStorage.setItem(selectId, html)
-      console.log('poured', selectId, html)
+      log('poured', selectId, html)
     },
     // takes saved HTML snapshot and creates
     // a temporary static DOM, allowing real app
     // to load in hidden mode
     open: function open () {
-      console.log('opening', selectId)
+      log('opening', selectId)
       var html = localStorage.getItem(selectId)
       if (html) {
-        html = html.replace('id="app"', 'id="dry-app"')
+        html = html.replace('id="' + selectId + '"',
+          'id="' + dryId + '"')
         var el = document.getElementById(selectId)
         el.insertAdjacentHTML('beforebegin', html)
         el.style.visibility = 'hidden'
@@ -22,9 +34,8 @@ function getBottle(selectId) {
     // when application is ready, replaces the static
     // DRY content with fully functioning application
     drink: function drink () {
-      console.log('drinking', selectId)
-      // document.querySelector('#dry-app').style.visibility = 'hidden'
-      var dryEl = document.getElementById('dry-app')
+      log('drinking', selectId)
+      var dryEl = document.getElementById(dryId)
       if (dryEl) {
         dryEl.parentNode.removeChild(dryEl)
       }
@@ -33,5 +44,5 @@ function getBottle(selectId) {
   }
 }
 
-var bottle = getBottle('app');
+var bottle = getBottle('app', true);
 bottle.open()
