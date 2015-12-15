@@ -1,14 +1,15 @@
-function getBottle(selectId, verbose) {
+function getBottle (selectId, verbose) {
+  function noop () {}
 
-  function noop() {}
+  var log = verbose ? console.log.bind(console) : noop
 
-  var log = verbose ? console.log.bind(console) : noop;
-
-  function formDrySelectorId(id) {
+  function formDrySelectorId (id) {
     return 'dry-' + id
   }
 
-  var dryId = formDrySelectorId(selectId);
+  var dryId = formDrySelectorId(selectId)
+
+  /* global localStorage */
 
   return {
     // saves HTML snapshot for a given module
@@ -44,5 +45,5 @@ function getBottle(selectId, verbose) {
   }
 }
 
-var bottle = getBottle('app', true);
+var bottle = getBottle('app', true)
 bottle.open()

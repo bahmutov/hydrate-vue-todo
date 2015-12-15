@@ -4,9 +4,9 @@
 [
   'https://cdn.jsdelivr.net/vue/1.0.11/vue.js',
   'src/app.js'
-].forEach(function(src) {
-  var script = document.createElement('script');
-  script.src = src;
-  script.async = false;
-  document.head.appendChild(script);
-});
+].forEach(function (src) {
+  var script = document.createElement('script')
+  script.src = src
+  script.async = false
+  document.head.appendChild(script)
+})

@@ -1,4 +1,5 @@
-new Vue({
+/* global bottle */
+new Vue({ // eslint-disable-line
   el: '#app',
   data: {
     newTodo: '',
