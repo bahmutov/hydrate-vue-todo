@@ -7,6 +7,14 @@
 [![Build status][hydrate-vue-todo-ci-image] ][hydrate-vue-todo-ci-url]
 [![semantic-release][semantic-image] ][semantic-url]
 
+Demo [glebbahmutov.com/hydrate-vue-todo/](http://glebbahmutov.com/hydrate-vue-todo/)
+
+The demo shows an application loading, but while it is loading, a "fake" DOM snapshot
+is inserted. This fake snapshot is saved from the "app" element every time the Todo list
+has changes. If the 'vue.js' library is taking long time to load from a CDN, this
+"fake" DOM becomes much better than a blank page. Of course, the user cannot interact
+with the "fake" - thus I show a blue overlay to stop the user.
+
 ### Small print
 
 Author: Gleb Bahmutov &copy; 2015
