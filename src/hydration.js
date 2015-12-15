@@ -45,5 +45,26 @@ function getBottle (selectId, verbose) {
   }
 }
 
-var bottle = getBottle('app', true)
-bottle.open()
+!(function initBottle () {
+  function findAttribute (attributes, name) {
+    var found
+    Array.prototype.some.call(attributes, function (attr) {
+      if (attr.name === name) {
+        found = attr
+        return found
+      }
+    })
+    return found && found.value
+  }
+
+  var scripts = document.querySelectorAll('script')
+  var lastScript = scripts[scripts.length - 1]
+
+  var id = findAttribute(lastScript.attributes, 'id') || 'app'
+  var verbose = findAttribute(lastScript.attributes, 'verbose') === 'true'
+
+  var bottle = getBottle(id, verbose)
+  bottle.open()
+
+  window.bottle = bottle
+}())
