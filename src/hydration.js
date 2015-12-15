@@ -30,12 +30,17 @@ function getBottle (selectId, verbose) {
     }
 
     function createMessage (text) {
+      var style
       if (!message) {
         message = document.createElement('h3')
-        message.style.color = '#333'
-        message.style.position = 'fixed'
-        message.style.top = '1em'
-        message.style.right = '2em'
+        style = message.style
+        style.color = '#333'
+        style.position = 'fixed'
+        style.top = '0em'
+        style.right = '1em'
+        style.backgroundColor = '#7FFFD4'
+        style.borderRadius = '5px'
+        style.padding = '1em 2em'
         document.body.appendChild(message)
       }
       message.textContent = text
