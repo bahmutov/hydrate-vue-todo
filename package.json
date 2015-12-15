@@ -4,7 +4,9 @@
   "description": "Almost instant Vue.js app init from the HTML stored from previous run",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "commit": "commit-wizard",
+    "size": "t=\"$(npm pack .)\"; wc -c \"${t}\"; tar tvf \"${t}\"; rm \"${t}\";"
   },
   "repository": {
     "type": "git",
@@ -26,5 +28,21 @@
   "bugs": {
     "url": "https://github.com/bahmutov/hydrate-vue-todo/issues"
   },
-  "homepage": "https://github.com/bahmutov/hydrate-vue-todo#readme"
+  "files": [
+    "index.html",
+    "src"
+  ],
+  "homepage": "https://github.com/bahmutov/hydrate-vue-todo#readme",
+  "config": {
+    "pre-git": {
+      "commit-msg": [],
+      "pre-commit": [],
+      "pre-push": [],
+      "post-commit": [],
+      "post-merge": []
+    }
+  },
+  "devDependencies": {
+    "pre-git": "3.1.1"
+  }
 }
