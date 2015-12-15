@@ -1,30 +1,37 @@
-var hydration = {
-  pour: function pour (selector) {
-    var html = document.querySelector(selector).outerHTML
-    localStorage.setItem(selector, html)
-    console.log('poured', selector, html)
-  },
-  open: function open (selector) {
-    console.log('opening', selector)
-    var html = localStorage.getItem(selector)
-    if (html) {
-      html = html.replace('id="app"', 'id="dry-app"')
-      var el = document.querySelector(selector)
-      el.insertAdjacentHTML('beforebegin', html)
-      el.style.visibility = 'hidden'
+function getBottle(selectId) {
+  return {
+    // saves HTML snapshot for a given module
+    pour: function pour () {
+      var html = document.getElementById(selectId).outerHTML
+      localStorage.setItem(selectId, html)
+      console.log('poured', selectId, html)
+    },
+    // takes saved HTML snapshot and creates
+    // a temporary static DOM, allowing real app
+    // to load in hidden mode
+    open: function open () {
+      console.log('opening', selectId)
+      var html = localStorage.getItem(selectId)
+      if (html) {
+        html = html.replace('id="app"', 'id="dry-app"')
+        var el = document.getElementById(selectId)
+        el.insertAdjacentHTML('beforebegin', html)
+        el.style.visibility = 'hidden'
+      }
+    },
+    // when application is ready, replaces the static
+    // DRY content with fully functioning application
+    drink: function drink () {
+      console.log('drinking', selectId)
+      // document.querySelector('#dry-app').style.visibility = 'hidden'
+      var dryEl = document.getElementById('dry-app')
+      if (dryEl) {
+        dryEl.parentNode.removeChild(dryEl)
+      }
+      document.getElementById(selectId).style.visibility = ''
     }
-  },
-  drink: function drink (selector) {
-    console.log('drinking', selector)
-    // document.querySelector('#dry-app').style.visibility = 'hidden'
-    var dryEl = document.querySelector('#dry-app')
-    dryEl.parentNode.removeChild(dryEl)
-    document.querySelector('#app').style.visibility = ''
   }
 }
-/*
-document.addEventListener('DOMContentLoaded', function () {
-  hydration.drink('#app')
-});
-*/
-hydration.open('#app')
+
+var bottle = getBottle('app');
+bottle.open()

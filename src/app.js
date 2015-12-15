@@ -18,10 +18,10 @@ new Vue({
   ready: function () {
     console.log('Todo app is ready')
     // replaces fake content with live
-    hydration.drink('#app')
+    bottle.drink()
 
     // we should save the HTML here
-    hydration.pour('#app')
+    bottle.pour()
   },
   methods: {
     addTodo: function () {
