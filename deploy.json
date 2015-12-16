@@ -5,6 +5,7 @@
     },
     "src": [
       "index.html",
+      "favicon.ico",
       "src/*.js"
     ]
   }
