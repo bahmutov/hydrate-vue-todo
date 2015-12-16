@@ -39,7 +39,7 @@ function getBottle (selectId, verbose, verboseUi) {
         style = message.style
         style.color = '#333'
         style.position = 'fixed'
-        style.top = '0em'
+        style.bottom = '0em'
         style.right = '1em'
         style.backgroundColor = '#7FFFD4'
         style.borderRadius = '5px'
@@ -114,10 +114,10 @@ function getBottle (selectId, verbose, verboseUi) {
       var html = document.getElementById(selectId).outerHTML
       localStorage.setItem(selectId, html)
       log('poured', selectId, html)
-      if (verboseUi) {
-        display.message.show('Saved application UI')
-        display.message.hide(1000)
-      }
+      // if (verboseUi) {
+      //   display.message.show('Saved application UI')
+      //   display.message.hide(1000)
+      // }
     },
     // takes saved HTML snapshot and creates
     // a temporary static DOM, allowing real app
