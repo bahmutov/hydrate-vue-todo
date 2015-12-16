@@ -2,7 +2,7 @@
 
 function noop () {}
 
-function getBottle (selectId, verbose) {
+function getBottle (selectId, verbose, verboseUi) {
   var log = verbose ? console.log.bind(console) : noop
 
   function formDrySelectorId (id) {
@@ -11,6 +11,7 @@ function getBottle (selectId, verbose) {
 
   var dryId = formDrySelectorId(selectId)
 
+  // TODO factor out into separate module
   var display = (function initOverlay () {
     var overlay, message
 
@@ -42,6 +43,9 @@ function getBottle (selectId, verbose) {
         style.right = '1em'
         style.backgroundColor = '#7FFFD4'
         style.borderRadius = '5px'
+        style.borderWidth = '1px'
+        style.borderColor = '#73E1BC'
+        style.borderStyle = 'solid'
         style.padding = '1em 2em'
         document.body.appendChild(message)
       }
@@ -105,15 +109,19 @@ function getBottle (selectId, verbose) {
       var html = document.getElementById(selectId).outerHTML
       localStorage.setItem(selectId, html)
       log('poured', selectId, html)
-      display.message.show('Saved application UI')
-      display.message.hide(1000)
+      if (verboseUi) {
+        display.message.show('Saved application UI')
+        display.message.hide(1000)
+      }
     },
     // takes saved HTML snapshot and creates
     // a temporary static DOM, allowing real app
     // to load in hidden mode
     open: function open () {
       log('opening', selectId)
-      display.overlay.show('Web application is loading ...')
+      if (verboseUi) {
+        display.overlay.show('Web application is loading ...')
+      }
 
       var html = localStorage.getItem(selectId)
       if (html) {
@@ -128,9 +136,11 @@ function getBottle (selectId, verbose) {
     // DRY content with fully functioning application
     drink: function drink () {
       log('drinking', selectId)
-      display.message.show('Web application is running')
-      display.overlay.hide()
-      display.message.hide(1000)
+      if (verboseUi) {
+        display.message.show('Web application is running')
+        display.overlay.hide()
+        display.message.hide(1000)
+      }
 
       var dryEl = document.getElementById(dryId)
       if (dryEl) {
@@ -158,10 +168,11 @@ function getBottle (selectId, verbose) {
 
   var id = findAttribute(lastScript.attributes, 'id') || 'app'
   var verbose = findAttribute(lastScript.attributes, 'verbose') === 'true'
+  var verboseUi = findAttribute(lastScript.attributes, 'verbose-ui') === 'true'
   var shouldHydrateName = findAttribute(lastScript.attributes, 'on') || 'hydrate'
   var shouldHydrate = window[shouldHydrateName]
 
-  var bottle = getBottle(id, verbose)
+  var bottle = getBottle(id, verbose, verboseUi)
   if (!shouldHydrate) {
     bottle.open = bottle.drink = noop
   }
