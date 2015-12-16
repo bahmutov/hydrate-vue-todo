@@ -135,6 +135,7 @@ function getBottle (selectId, verbose, verboseUi) {
         var el = document.getElementById(selectId)
         el.insertAdjacentHTML('beforebegin', html)
         el.style.visibility = 'hidden'
+        el.style.display = 'none'
       }
     },
     // when application is ready, replaces the static
@@ -151,7 +152,9 @@ function getBottle (selectId, verbose, verboseUi) {
       if (dryEl) {
         dryEl.parentNode.removeChild(dryEl)
       }
-      document.getElementById(selectId).style.visibility = ''
+      var appEl = document.getElementById(selectId)
+      appEl.style.visibility = ''
+      appEl.style.display = 'initial'
     }
   }
 }
