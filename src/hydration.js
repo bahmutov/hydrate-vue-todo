@@ -103,6 +103,11 @@ function getBottle (selectId, verbose, verboseUi) {
     // clears any saved HTML
     recycle: function recycle () {
       localStorage.removeItem(selectId)
+      log('removed HTML from localStorage')
+      if (verboseUi) {
+        display.message.show('Cleared storage')
+        display.message.hide(1000)
+      }
     },
     // saves HTML snapshot for a given module
     refill: function refill () {
