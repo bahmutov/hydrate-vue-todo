@@ -29,7 +29,7 @@ new Vue({ // eslint-disable-line
       localStorage.setItem('todos', JSON.stringify(this.todos))
       setTimeout(function () {
         // we should save the HTML after it has been rendered
-        bottle.pour()
+        bottle.refill()
       }, 0)
     },
     addTodo: function () {

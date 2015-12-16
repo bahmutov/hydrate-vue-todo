@@ -96,8 +96,12 @@ function getBottle (selectId, verbose) {
   /* global localStorage */
 
   return {
+    // clears any saved HTML
+    recycle: function recycle () {
+      localStorage.removeItem(selectId)
+    },
     // saves HTML snapshot for a given module
-    pour: function pour () {
+    refill: function refill () {
       var html = document.getElementById(selectId).outerHTML
       localStorage.setItem(selectId, html)
       log('poured', selectId, html)
@@ -137,12 +141,6 @@ function getBottle (selectId, verbose) {
   }
 }
 
-var fakeBottle = {
-  pour: noop,
-  open: noop,
-  drink: noop
-}
-
 !(function initBottle () {
   function findAttribute (attributes, name) {
     var found
@@ -163,9 +161,10 @@ var fakeBottle = {
   var shouldHydrateName = findAttribute(lastScript.attributes, 'on') || 'hydrate'
   var shouldHydrate = window[shouldHydrateName]
 
-  var bottle = shouldHydrate
-    ? getBottle(id, verbose)
-    : fakeBottle
+  var bottle = getBottle(id, verbose)
+  if (!shouldHydrate) {
+    bottle.open = bottle.drink = noop
+  }
 
   bottle.open()
   window.bottle = bottle
