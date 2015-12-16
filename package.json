@@ -33,6 +33,7 @@
   },
   "files": [
     "index.html",
+    "favicon.ico",
     "src"
   ],
   "homepage": "https://github.com/bahmutov/hydrate-vue-todo#readme",
