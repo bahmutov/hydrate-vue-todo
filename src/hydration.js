@@ -103,6 +103,11 @@ function getBottle (selectId, verbose, verboseUi) {
     // clears any saved HTML
     recycle: function recycle () {
       localStorage.removeItem(selectId)
+      log('removed HTML from localStorage')
+      if (verboseUi) {
+        display.message.show('Cleared storage')
+        display.message.hide(1000)
+      }
     },
     // saves HTML snapshot for a given module
     refill: function refill () {
@@ -130,6 +135,7 @@ function getBottle (selectId, verbose, verboseUi) {
         var el = document.getElementById(selectId)
         el.insertAdjacentHTML('beforebegin', html)
         el.style.visibility = 'hidden'
+        el.style.display = 'none'
       }
     },
     // when application is ready, replaces the static
@@ -146,7 +152,9 @@ function getBottle (selectId, verbose, verboseUi) {
       if (dryEl) {
         dryEl.parentNode.removeChild(dryEl)
       }
-      document.getElementById(selectId).style.visibility = ''
+      var appEl = document.getElementById(selectId)
+      appEl.style.visibility = ''
+      appEl.style.display = 'initial'
     }
   }
 }
