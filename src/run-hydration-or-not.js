@@ -15,3 +15,8 @@ el.addEventListener('click', function () {
     bottle.recycle()
   }
 })
+
+document.getElementById('clear').addEventListener('click', function () {
+  console.log('clearing any HTML saved in the local storage')
+  bottle.recycle()
+})

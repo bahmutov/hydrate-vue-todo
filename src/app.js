@@ -23,6 +23,9 @@ new Vue({ // eslint-disable-line
     // replaces fake content with live
     bottle.drink()
     document.getElementById('app').classList.remove('hidden')
+
+    // save the starting HTML
+    bottle.refill()
   },
   methods: {
     save: function save () {
