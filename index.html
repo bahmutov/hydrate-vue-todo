@@ -9,12 +9,14 @@
   The "dry" HTML will be shown while the Vue.js library is being loaded, then
   it will replace the static "dry" HTML with the fully functional web application.
   </p>
-  <p>To fully appreciate the experience, open DevTools Network tab and example
-  network throttling to slow down the loading of the vue.js script.
-  You will see that this demo loads immediately!
+  <p>To fully appreciate the experience, we simulate network delays
+  by delaying the vue.js and application loading by 2 seconds.
+  Notice the delay when an empty list item template is showing.
+  Now check the box below and reload the page - you should see valid
+  page even before the live web application has started.
   </p>
   <p>
-  Use hydration: <input type="checkbox" name="hydrate">
+  Use hydration: <input type="checkbox" name="hydrate" id="hydrate">
   </p>
   <h2>Vue app below</h2>
   <div id="app">
@@ -27,7 +29,8 @@
     </ul>
   </div>
 
-  <script src="src/hydration.js" id="app" verbose="true"></script>
+  <script src="src/run-hydration-or-not.js"></script>
+  <script src="src/hydration.js" id="app" verbose="true" on="hydrate"></script>
   <script src="src/load-app.js"></script>
 </body>
 </html>

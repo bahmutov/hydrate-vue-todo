@@ -1,6 +1,8 @@
-function getBottle (selectId, verbose) {
-  function noop () {}
+'use strict'
 
+function noop () {}
+
+function getBottle (selectId, verbose) {
   var log = verbose ? console.log.bind(console) : noop
 
   function formDrySelectorId (id) {
@@ -135,6 +137,12 @@ function getBottle (selectId, verbose) {
   }
 }
 
+var fakeBottle = {
+  pour: noop,
+  open: noop,
+  drink: noop
+}
+
 !(function initBottle () {
   function findAttribute (attributes, name) {
     var found
@@ -152,9 +160,13 @@ function getBottle (selectId, verbose) {
 
   var id = findAttribute(lastScript.attributes, 'id') || 'app'
   var verbose = findAttribute(lastScript.attributes, 'verbose') === 'true'
+  var shouldHydrateName = findAttribute(lastScript.attributes, 'on') || 'hydrate'
+  var shouldHydrate = window[shouldHydrateName]
 
-  var bottle = getBottle(id, verbose)
+  var bottle = shouldHydrate
+    ? getBottle(id, verbose)
+    : fakeBottle
+
   bottle.open()
-
   window.bottle = bottle
 }())
