@@ -23,13 +23,16 @@ new Vue({ // eslint-disable-line
     // replaces fake content with live
     bottle.drink()
     document.getElementById('app').classList.remove('hidden')
+
+    // save the starting HTML
+    bottle.refill()
   },
   methods: {
     save: function save () {
       localStorage.setItem('todos', JSON.stringify(this.todos))
       setTimeout(function () {
         // we should save the HTML after it has been rendered
-        bottle.pour()
+        bottle.refill()
       }, 0)
     },
     addTodo: function () {
