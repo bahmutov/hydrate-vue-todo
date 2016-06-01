@@ -1,0 +1,21 @@
+.hidden {
+  visibility: hidden;
+  display: none;
+}
+body {
+  padding: 2em;
+  font-family: Didot, 'Didot LT STD', 'Hoefler Text', 'Garamond', 'Times New Roman', serif;
+  color: #333333;
+  background-color: #fff;
+}
+a {
+  text-decoration: none;
+  font-family: monospace;
+  font-size: large;
+}
+.controls {
+  padding: 2px 10px;
+  border: 1px solid #dddddd;
+  border-radius: 5px;
+  background-color: #fefefe;
+}

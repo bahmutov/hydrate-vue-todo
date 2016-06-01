@@ -6,6 +6,7 @@
     "src": [
       "index.html",
       "bare.html",
+      "app.css",
       "favicon.ico",
       "src/*.js"
     ]

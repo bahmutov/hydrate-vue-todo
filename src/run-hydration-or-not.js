@@ -20,3 +20,7 @@ document.getElementById('clear').addEventListener('click', function () {
   console.log('clearing any HTML saved in the local storage')
   bottle.recycle()
 })
+
+document.getElementById('reload').addEventListener('click', function () {
+  window.location.reload()
+})
