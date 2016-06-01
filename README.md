@@ -7,7 +7,8 @@
 [![Build status][hydrate-vue-todo-ci-image] ][hydrate-vue-todo-ci-url]
 [![semantic-release][semantic-image] ][semantic-url]
 
-Demo [glebbahmutov.com/hydrate-vue-todo/](http://glebbahmutov.com/hydrate-vue-todo/)
+Demo [glebbahmutov.com/hydrate-vue-todo/](https://glebbahmutov.com/hydrate-vue-todo/),
+[glebbahmutov.com/hydrate-vue-todo/bare.html](https://glebbahmutov.com/hydrate-vue-todo/bare.html)
 
 The demo shows an application loading, but while it is loading, a "fake" DOM snapshot
 is inserted. This fake snapshot is saved from the "app" element every time the Todo list
