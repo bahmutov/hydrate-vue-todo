@@ -38,13 +38,24 @@ new Vue({ // eslint-disable-line
     addTodo: function () {
       var text = this.newTodo.trim()
       if (text) {
-        this.todos.push({ text: text })
+        this.todos.unshift({ text: text })
         this.newTodo = ''
       }
       this.save()
     },
     removeTodo: function (index) {
       this.todos.splice(index, 1)
+      this.save()
+    },
+    addManyTodos: function () {
+      var k
+      for (k = 0; k < 100; k += 1) {
+        this.todos.push({ text: 'do ' + k })
+      }
+      this.save()
+    },
+    removeTodos: function () {
+      this.todos = []
       this.save()
     }
   }

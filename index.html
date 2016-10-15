@@ -10,8 +10,14 @@
 
   <h2>Vue app below</h2>
   <div id="app" class="hidden">
+    <div>
     Enter todo: <input v-model="newTodo" v-on:keyup.enter="addTodo"
       placeholder="learn Italian" title="Enter text and press Enter">
+    </div>
+    <div>
+      <button v-on:click="addManyTodos()">Add many todos</button>
+      <button v-on:click="removeTodos()">Remove all todos</button>
+    </div>
     <ul>
       <li v-for="todo in todos">
         <span v-text="todo.text"></span>
